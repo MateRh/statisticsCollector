@@ -19,15 +19,15 @@ function Core:getPlayers()
     return self.players
 end
 
-function Core:getPlayer(serial, name)
+function Core:getPlayer(serial, name, health)
     if self.players[serial] then
         return self.players[serial]
     end
-    return self:createPlayer(serial, name)
+    return self:createPlayer(serial, name, health)
 end 
 
-function Core:createPlayer(serial, name)
-    self.players[serial] = Player(serial, name)
+function Core:createPlayer(serial, name, health)
+    self.players[serial] = Player(serial, name, health)
     return self.players[serial]
 end
 
@@ -42,27 +42,28 @@ addEventHandler("onPlayerDamage", getRootElement(),
         if attacker and weapon then
             core:calculateDamage(core:getPlayer(attacker:getSerial()):getWeapon(weapon), loss)
         end
+        core:getPlayer(source:getSerial()):setHealth(source:getHealth())
     end
 )
 
 addEventHandler("onPlayerWasted", getRootElement(),
     function(ammo, attacker, weapon)
         if attacker and weapon then
-            core.calculateDamage(core:getPlayer(attacker:getSerial()):getWeapon(weapon), source:getHealth())
+            core.calculateDamage(core:getPlayer(attacker:getSerial()):getWeapon(weapon), core:getPlayer(source:getSerial()):getHealth())
         end
     end 
 )
 
 addEventHandler("onPlayerJoin", getRootElement(),
     function()
-        core:getPlayer(source:getSerial(), source:getName())
+        core:getPlayer(source:getSerial(), source:getName(), source:getHealth())
     end
 )
 
 addEventHandler("onResourceStart", getResourceRootElement(getThisResource()),
     function()
         for k, source in pairs(getElementsByType("player")) do
-            core:getPlayer(source:getSerial(), source:getName())    
+            core:createPlayer(source:getSerial(), source:getName(), source:getHealth())    
         end
     end
 )

@@ -1,13 +1,13 @@
 Csv = class(
     function(this, filePath)
-        this.separator = ","
+        this.separator = "\t"
         this.endLine = "\n"
         this.file = File.new(filePath)
     end
 )
 
 function Csv:printHeader()
-    local header = "Player name,Total damage,"
+    local header = "Player name" .. self.separator .. "Total damage" .. self.separator
     for k, id in ipairs(WEAPON_IDS) do
         header = header .. getWeaponNameFromID(id) .. " damage"
         if (k < #WEAPON_IDS) then

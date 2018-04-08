@@ -2,6 +2,7 @@ Player = class(
     function(this, serial, name)
         this.serial = serial
         this.name = name
+        this.health = 0
         this.weapons = {}
         for k, id in ipairs(WEAPON_IDS) do
             table.insert(this.weapons, id, Weapon(id))
@@ -19,4 +20,12 @@ end
 
 function Player:getName()
     return self.name
+end
+
+function Player:getHealth()
+    return self.health
+end
+
+function Player:setHealth(health)
+    self.health = health
 end
