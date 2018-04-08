@@ -1,0 +1,2 @@
+# statisticsCollector
+Damage statistics collector.
