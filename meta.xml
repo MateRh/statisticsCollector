@@ -1,0 +1,13 @@
+<meta>
+	<info author="Mate_" type="misc" name="statisticsCollector" description="Damage statistics collector." version="0.0.1" />
+
+	<script src="shared/class.lua" type="shared"/>
+
+	<script src="weapon.lua"/>
+	<script src="player.lua"/>
+	<script src="csv.lua"/>
+	<script src="core.lua"/>
+
+	<oop>true</oop>
+	
+</meta>
